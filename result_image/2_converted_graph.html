@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+        <!-- <style>
+            #allImage {display:none;}
+        </style> -->
+        <!-- <script type="text/javascript" src="./first_script.js"></script> -->
+        <title>Converted Graph</title>
+    </head>
+    <body>
+        <h1>This pages shows sample graphs from frames</h1>
+        <form>
+            <fieldset>
+                    <legend>Select your interest</legend>
+                    <h3>Choose a game:</h3>
+                    <select id='selectedGame' onclick="disableBtn()">
+                        <option value="" selected="selected" hidden="hidden">Choose here</option>
+                        <!-- <option value='TS'>3D Marks TimeSpy</option> -->
+                        <option value='FS'>3D Marks FireStrike</option>
+                        <option value='GTA5'>Grand Theft AutoV</option>
+                    </select>
+                    <br><br>
+                    <h3>Choose a scene: </h3>
+                    <div class="radiobtn_group">
+                        <p>Please note that TimeSpy only has 1 scene (scene1), Fire Strike has 2 scenes (Scene1&amp;Scene2) and GTA5 has 5 scenes</p>
+                        <input type="radio" class="which_scene" name ="Scene" id="s1"> Scene1<br>
+                        <input type="radio" class="which_scene" name = "Scene"id="s2"> Scene2<br>
+                        <input type="radio" class="which_scene" name ="Scene"id="s3"> Scene3<br>
+                        <input type="radio" class="which_scene" name ="Scene"id="s4"> Scene4<br>
+                        <input type="radio" class="which_scene" name ="Scene"id="s5"> Scene5<br>
+                    <br>
+                    </div>
+                    <br>
+                    <h3>Choose graph format: </h3>
+                    <div class="radiobtn_group">
+                        <input type="radio" class="which_choice" name ="choice" id="choice1"> Integrated graph per frame<br>
+                        <input type="radio" class="which_choice" name ="choice"id="choice2"> 3 sample graphs from each frame<br>
+                    <br>
+                    </div>
+
+                    <!-- <div id="boton"> -->
+                    <input type="button"id="mySubmit" name="submit" value="Select" onclick="show()">
+                    <input type="reset" id="myClear" name="clear" value="Reset" onclick="remove()">
+            </fieldset>
+        </form>
+        <form>
+        <fieldset id="frame" style="display: none;">
+            <fieldset id="all_cs" class="all_s" style="display: inline-block;" >
+                <legend>Compute shader</legend>
+                <img src="../result_image/graph/fs_s1f1000_cs.png" class="fs_frame_graph1"id="fs_f98_cs" style="display:none;"/>
+                <img src="../result_image/graph/fs_s2f2000_cs.png" class="fs_frame_graph2"id="fs_f98_cs" style="display:none;"/>
+
+                <img src="../result_image/graph/gtav_f98_cs.png" class="gtav_frame_graph1"id="gtav_f98_cs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s2f200_cs.png" class="gtav_frame_graph2"id="gtav_f98_cs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s3f300_cs.png" class="gtav_frame_graph3"id="gtav_f98_cs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s4f400_cs.png" class="gtav_frame_graph4"id="gtav_f98_cs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s5f600_cs.png" class="gtav_frame_graph5"id="gtav_f98_cs" style="display:none;"/>
+            </fieldset>
+
+            <fieldset id="all_ls"class="all_s" style="display: inline-block;">
+                <legend>Local shader</legend>
+                <img src="../result_image/graph/fs_s1f1000_ls.png" class="fs_frame_graph1"id="fs_f98_ls" style="display:none;"/>
+                <img src="../result_image/graph/fs_s2f2000_ls.png" class="fs_frame_graph2"id="fs_f98_ls" style="display:none;"/>
+
+                <img src="../result_image/graph/gtav_f98_ls.png" class="gtav_frame_graph1"id="gtav_f98_ls" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s2f200_ls.png" class="gtav_frame_graph2"id="gtav_f98_ls" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s3f300_ls.png" class="gtav_frame_graph3"id="gtav_f98_ls" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s4f400_ls.png" class="gtav_frame_graph4"id="gtav_f98_ls" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s5f600_ls.png" class="gtav_frame_graph5"id="gtav_f98_ls" style="display:none;"/>
+            
+            </fieldset>
+            <fieldset id="all_es"class="all_s" style="display: inline-block;">
+                <legend>Export shader</legend>
+                <img src="../result_image/graph/fs_s1f1000_es.png" class="fs_frame_graph1"id="fs_f98_es" style="display:none;"/>
+                <img src="../result_image/graph/fs_s2f2000_es.png" class="fs_frame_graph2"id="fs_f98_es" style="display:none;"/>
+
+                <img src="../result_image/graph/gtav_f98_es.png" class="gtav_frame_graph1"id="gtav_f98_es" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s2f200_es.png" class="gtav_frame_graph2"id="gtav_f98_es" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s3f300_es.png" class="gtav_frame_graph3"id="gtav_f98_es" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s4f400_es.png" class="gtav_frame_graph4"id="gtav_f98_es" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s5f600_es.png" class="gtav_frame_graph5"id="gtav_f98_es" style="display:none;"/>
+            </fieldset>
+            <fieldset id="all_vs"class="all_s" style="display: inline-block;">
+                <legend>Vertex shader</legend>
+                <img src="../result_image/graph/fs_s1f1000_vs.png" class="fs_frame_graph1"id="fs_f98_vs" style="display:none;"/>
+                <img src="../result_image/graph/fs_s2f2000_vs.png" class="fs_frame_graph2"id="fs_f98_vs" style="display:none;"/>
+
+                <img src="../result_image/graph/gtav_f98_vs.png" class="gtav_frame_graph1"id="gtav_f98_vs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s2f200_vs.png" class="gtav_frame_graph2"id="gtav_f98_vs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s3f300_vs.png" class="gtav_frame_graph3"id="gtav_f98_vs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s4f400_vs.png" class="gtav_frame_graph4"id="gtav_f98_vs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s5f600_vs.png" class="gtav_frame_graph5"id="gtav_f98_vs" style="display:none;"/>
+            </fieldset>
+            <fieldset id="all_ps" class="all_s"style="display: inline-block;">
+                <legend>Pixel shader</legend>
+                <img src="../result_image/graph/fs_s1f1000_ps.png" class="fs_frame_graph1"id="fs_f98_ps" style="display:none;"/>
+                <img src="../result_image/graph/fs_s2f2000_ps.png" class="fs_frame_graph2"id="fs_f98_ps" style="display:none;"/>
+
+                <img src="../result_image/graph/gtav_f98_ps.png" class="gtav_frame_graph1"id="gtav_f98_ps" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s2f200_ps.png" class="gtav_frame_graph2"id="gtav_f98_ps" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s3f300_ps.png" class="gtav_frame_graph3"id="gtav_f98_ps" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s4f400_ps.png" class="gtav_frame_graph4"id="gtav_f98_ps" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s5f600_ps.png" class="gtav_frame_graph5"id="gtav_f98_ps" style="display:none;"/>
+            </fieldset>
+            <fieldset id="all_gs"class="all_s" style="display: inline-block;">
+                <legend>Geometry shader</legend>
+                <img src="../result_image/graph/fs_s1f1000_gs.png" class="fs_frame_graph1"id="fs_f98_gs" style="display:none;"/>
+                <img src="../result_image/graph/fs_s2f2000_gs.png" class="fs_frame_graph2"id="fs_f98_gs" style="display:none;"/>
+
+                <img src="../result_image/graph/gtav_f98_gs.png" class="gtav_frame_graph1"id="gtav_f98_gs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s2f200_gs.png" class="gtav_frame_graph2"id="gtav_f98_gs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s3f300_gs.png" class="gtav_frame_graph3"id="gtav_f98_gs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s4f400_gs.png" class="gtav_frame_graph4"id="gtav_f98_gs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s5f600_gs.png" class="gtav_frame_graph5"id="gtav_f98_gs" style="display:none;"/>
+            </fieldset>
+            <fieldset id="all_hs" class="all_s" style="display: inline-block;">
+                <legend>Hull shader</legend>
+                <img src="../result_image/graph/gtav_f98_hs.png" class="gtav_frame_graph1"id="gtav_f98_hs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s2f200_hs.png" class="gtav_frame_graph2"id="gtav_f98_hs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s3f300_hs.png" class="gtav_frame_graph3"id="gtav_f98_hs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s4f400_hs.png" class="gtav_frame_graph4"id="gtav_f98_hs" style="display:none;"/>
+                <img src="../result_image/graph/gtav_s5f600_hs.png" class="gtav_frame_graph5"id="gtav_f98_hs" style="display:none;"/>
+            </fieldset>
+        </fieldset>
+        </form> 
+
+
+
+
+
+
+        <form>
+            <fieldset id="sample" style="display: none;">
+                <fieldset id="all_cs_sample" class="all_s" style="display: inline-block;" >
+                    <legend>Compute shader</legend>
+                    <img src="../result_image/graph/sample/fs_s1f1000_cs_sampleGT1_pm4ps_f1000_d155_CS_0x00000001020c9000_unfold_edgelist.png"
+                        class="fs_sample1"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_cs_sampleGT1_pm4ps_f1000_d785_CS_0x00000001020ba800_unfold_edgelist.png"
+                        class="fs_sample1"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_cs_sampleGT1_pm4ps_f1000_d839_CS_0x00000001020b6800_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_cs_sampleGT2_pm4ps_f2000_d1006_CS_0x0000000101409800_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_cs_sampleGT2_pm4ps_f2000_d1159_CS_0x0000000102080800_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_cs_sampleGT2_pm4ps_f2000_d450_CS_0x0000000101426400_unfold_edgelist.png"
+                          class="fs_sample2"id="fs_f98_cs" style="display:none;"/>                         
+    
+                    <img src="../result_image/graph/gtav_f98_cs.png" class="gtav_frame_graph1"id="gtav_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s2f200_cs.png" class="gtav_frame_graph2"id="gtav_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s3f300_cs.png" class="gtav_frame_graph3"id="gtav_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s4f400_cs.png" class="gtav_frame_graph4"id="gtav_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s5f600_cs.png" class="gtav_frame_graph5"id="gtav_f98_cs" style="display:none;"/>
+                </fieldset>
+                <fieldset id="all_ls_sample"class="all_s" style="display: inline-block;">
+                    <legend>Local shader</legend>
+                    <img src="../result_image/graph/sample/fs_s1f1000_ls_sampleGT1_pm4ps_f1000_d180_LS_0x0000000102044000_unfold_edgelist.png" 
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_ls_sampleGT1_pm4ps_f1000_d394_LS_0x000000010207a000_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_ls_sampleGT1_pm4ps_f1000_d432_LS_0x000000010209a000_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>    
+                         <img src="../result_image/graph/sample/fs_s2f2000_ls_sampleGT2_pm4ps_f2000_d1016_LS_0x00000001020a4000_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_ls_sampleGT2_pm4ps_f2000_d731_LS_0x000000010200c000_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_ls_sampleGT2_pm4ps_f2000_d861_LS_0x0000000102046000_unfold_edgelist.png"
+                          class="fs_sample2"id="fs_f98_cs" style="display:none;"/> 
+
+                    <img src="../result_image/graph/gtav_f98_ls.png" class="gtav_frame_graph1"id="gtav_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s2f200_ls.png" class="gtav_frame_graph2"id="gtav_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s3f300_ls.png" class="gtav_frame_graph3"id="gtav_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s4f400_ls.png" class="gtav_frame_graph4"id="gtav_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s5f600_ls.png" class="gtav_frame_graph5"id="gtav_f98_ls" style="display:none;"/>
+                
+                </fieldset>
+                <fieldset id="all_es_sample"class="all_s" style="display: inline-block;">
+                    <legend>Export shader</legend>
+                    <img src="../result_image/graph/sample/fs_s1f1000_es_sampleGT1_pm4ps_f1000_d400_ES_0x00000001020c6000_unfold_edgelist.png" 
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_es_sampleGT1_pm4ps_f1000_d793_ES_0x00000001020c5000_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_es_sampleGT1_pm4ps_f1000_d840_ES_0x00000001020b7800_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>  
+                    <img src="../result_image/graph/sample/fs_s2f2000_es_sampleGT2_pm4ps_f2000_d1000_ES_0x0000000102059000_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_es_sampleGT2_pm4ps_f2000_d1160_ES_0x0000000102081800_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_es_sampleGT2_pm4ps_f2000_d670_ES_0x000000010208c000_unfold_edgelist.png"
+                          class="fs_sample2"id="fs_f98_cs" style="display:none;"/> 
+
+                    <img src="../result_image/graph/gtav_f98_es.png" class="gtav_frame_graph1"id="gtav_f98_es" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s2f200_es.png" class="gtav_frame_graph2"id="gtav_f98_es" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s3f300_es.png" class="gtav_frame_graph3"id="gtav_f98_es" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s4f400_es.png" class="gtav_frame_graph4"id="gtav_f98_es" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s5f600_es.png" class="gtav_frame_graph5"id="gtav_f98_es" style="display:none;"/>
+                </fieldset>
+                <fieldset id="all_vs_sample"class="all_s" style="display: inline-block;">
+                    <legend>Vertex shader</legend>
+                    <img src="../result_image/graph/sample/fs_s1f1000_vs_sampleGT1_pm4ps_f1000_d173_VS_0x00000001020bd300_unfold_edgelist.png" 
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_vs_sampleGT1_pm4ps_f1000_d400_VS_0x00000001020c7300_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_vs_sampleGT1_pm4ps_f1000_d798_VS_0x00000001020c8600_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>  
+                    <img src="../result_image/graph/sample/fs_s2f2000_vs_sampleGT2_pm4ps_f2000_d1000_VS_0x0000000102059500_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_vs_sampleGT2_pm4ps_f2000_d1160_VS_0x0000000102081c00_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_vs_sampleGT2_pm4ps_f2000_d670_VS_0x000000010208d300_unfold_edgelist.png"
+                          class="fs_sample2"id="fs_f98_cs" style="display:none;"/> 
+
+                    <img src="../result_image/graph/gtav_f98_vs.png" class="gtav_frame_graph1"id="gtav_f98_vs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s2f200_vs.png" class="gtav_frame_graph2"id="gtav_f98_vs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s3f300_vs.png" class="gtav_frame_graph3"id="gtav_f98_vs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s4f400_vs.png" class="gtav_frame_graph4"id="gtav_f98_vs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s5f600_vs.png" class="gtav_frame_graph5"id="gtav_f98_vs" style="display:none;"/>
+                </fieldset>
+                <fieldset id="all_ps_sample" class="all_s"style="display: inline-block;">
+                    <legend>Pixel shader</legend>
+                    <img src="../result_image/graph/sample/fs_s1f1000_ps_sampleGT1_pm4ps_f1000_d374_PS_0x0000000102072200_unfold_edgelist.png" 
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_ps_sampleGT1_pm4ps_f1000_d419_PS_0x000000010208d600_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_ps_sampleGT1_pm4ps_f1000_d832_PS_0x00000001020b6200_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>  
+                         <img src="../result_image/graph/sample/fs_s2f2000_ps_sampleGT2_pm4ps_f2000_d1000_PS_0x0000000102059600_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_ps_sampleGT2_pm4ps_f2000_d1163_PS_0x0000000102115800_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_ps_sampleGT2_pm4ps_f2000_d731_PS_0x000000010200d900_unfold_edgelist.png"
+                          class="fs_sample2"id="fs_f98_cs" style="display:none;"/> 
+
+                    <img src="../result_image/graph/gtav_f98_ps.png" class="gtav_frame_graph1"id="gtav_f98_ps" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s2f200_ps.png" class="gtav_frame_graph2"id="gtav_f98_ps" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s3f300_ps.png" class="gtav_frame_graph3"id="gtav_f98_ps" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s4f400_ps.png" class="gtav_frame_graph4"id="gtav_f98_ps" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s5f600_ps.png" class="gtav_frame_graph5"id="gtav_f98_ps" style="display:none;"/>
+                </fieldset>
+                <fieldset id="all_gs_sample"class="all_s" style="display: inline-block;">
+                    <legend>Geometry shader</legend>
+                    <img src="../result_image/graph/sample/fs_s1f1000_gs_sampleGT1_pm4ps_f1000_d0_GS_0x0000000101442400_unfold_edgelist.png" 
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_gs_sampleGT1_pm4ps_f1000_d372_GS_0x000000010206e000_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s1f1000_gs_sampleGT1_pm4ps_f1000_d818_GS_0x00000001020a8800_unfold_edgelist.png"
+                         class="fs_sample1"id="fs_f98_ls" style="display:none;"/>  
+                    <img src="../result_image/graph/sample/fs_s2f2000_gs_sampleGT2_pm4ps_f2000_d1000_GS_0x0000000102064000_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_gs_sampleGT2_pm4ps_f2000_d1160_GS_0x0000000102115000_unfold_edgelist.png"
+                         class="fs_sample2"id="fs_f98_cs" style="display:none;"/>
+                    <img src="../result_image/graph/sample/fs_s2f2000_gs_sampleGT2_pm4ps_f2000_d730_GS_0x000000010200b000_unfold_edgelist.png"
+                          class="fs_sample2"id="fs_f98_cs" style="display:none;"/>     
+                    <img src="../result_image/graph/gtav_f98_gs.png" class="gtav_frame_graph1"id="gtav_f98_gs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s2f200_gs.png" class="gtav_frame_graph2"id="gtav_f98_gs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s3f300_gs.png" class="gtav_frame_graph3"id="gtav_f98_gs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s4f400_gs.png" class="gtav_frame_graph4"id="gtav_f98_gs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s5f600_gs.png" class="gtav_frame_graph5"id="gtav_f98_gs" style="display:none;"/>
+                </fieldset>
+                <fieldset id="all_hs_sample" class="all_s" style="display: inline-block;">
+                    <legend>Hull shader</legend>
+                    <img src="../result_image/graph/gtav_f98_hs.png" class="gtav_frame_graph1"id="gtav_f98_hs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s2f200_hs.png" class="gtav_frame_graph2"id="gtav_f98_hs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s3f300_hs.png" class="gtav_frame_graph3"id="gtav_f98_hs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s4f400_hs.png" class="gtav_frame_graph4"id="gtav_f98_hs" style="display:none;"/>
+                    <img src="../result_image/graph/gtav_s5f600_hs.png" class="gtav_frame_graph5"id="gtav_f98_hs" style="display:none;"/>
+                </fieldset>
+            </fieldset>
+            </form> 
+
+
+    <script>
+    function remove(){
+        var images = document.getElementsByClassName('allImage');
+        console.log(images)
+        var l = images.length;
+        // myDiv.innerHTML = "";
+        for (var i = 0; i < l; i++) {
+                if(images[i].style.display==='block'){
+                    console.log('inside')
+                    console.log(images[i])
+                    images[i].style.display='none'
+                }
+        }
+        var frame = document.getElementById('frame');
+        if(frame.style.display==='block'){
+                frame.style.display='none'
+        }
+        var sample = document.getElementById('sample');
+        if(sample.style.display==='block'){
+                sample.style.display='none'
+        }
+        var numScene = document.getElementsByClassName("which_scene")
+        for (var i = 0; i < numScene.length; i++) {
+            numScene[i].disabled=false
+        }
+    }
+    function disableBtn(){
+        var select = document.getElementById('selectedGame');
+        console.log(select)
+		var option = select.options[select.selectedIndex];
+        console.log(option) 
+        var numScene = document.getElementsByClassName("which_scene")
+        console.log(numScene[0].id)
+        if(option.value==='TS'){
+            for (var i = 0; i < numScene.length; i++) {
+                    if(numScene[i].id !=='s1'){
+                        numScene[i].disabled=true
+                    }
+            }
+        }
+        else if(option.value==='FS'){
+            for (var i = 0; i < numScene.length; i++) {
+                    if(numScene[i].id !=='s1' && numScene[i].id !=='s2' ){
+                        numScene[i].disabled=true
+                    }
+            }
+        }
+    }
+        
+    function show() {
+            updateImg()
+            // document.getElementById('btnID').style.display = "mySubmit";
+    }
+    function byFrame(){
+        var select = document.getElementById('selectedGame');
+        console.log(select)
+		var option = select.options[select.selectedIndex];
+        console.log(option) 
+        if(option.value==='TS'){
+            document.getElementById('TSimage').style.display = "block";
+        }
+        else if(option.value==="FS"){
+            if(document.getElementById('s1').checked){
+                var g_graph = document.getElementsByClassName('fs_frame_graph1')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+            else if(document.getElementById('s2').checked){
+                var g_graph = document.getElementsByClassName('fs_frame_graph2')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+        }
+        else if(option.value==="GTA5"){
+            if(document.getElementById('s1').checked){
+                var g_graph = document.getElementsByClassName('gtav_frame_graph1')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+            else if(document.getElementById('s2').checked){
+                var g_graph = document.getElementsByClassName('gtav_frame_graph2')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+            else if(document.getElementById('s3').checked){
+                var g_graph = document.getElementsByClassName('gtav_frame_graph3')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+            else if(document.getElementById('s4').checked){
+                var g_graph = document.getElementsByClassName('gtav_frame_graph4')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+            else if(document.getElementById('s5').checked){
+                var g_graph = document.getElementsByClassName('gtav_frame_graph5')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+
+
+        }
+    }
+
+    function top3graphs(){
+        var select = document.getElementById('selectedGame');
+        console.log(select)
+		var option = select.options[select.selectedIndex];
+        console.log(option) 
+        if(option.value==='TS'){
+            document.getElementById('TSimage').style.display = "block";
+        }
+        else if(option.value==="FS"){
+            if(document.getElementById('s1').checked){
+                var g_graph = document.getElementsByClassName('fs_sample1')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+            else if(document.getElementById('s2').checked){
+                var g_graph = document.getElementsByClassName('fs_sample2')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+        }
+        else if(option.value==="GTA5"){
+            if(document.getElementById('s1').checked){
+                var g_graph = document.getElementsByClassName('gtav_frame_graph1')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+            else if(document.getElementById('s2').checked){
+                var g_graph = document.getElementsByClassName('gtav_frame_graph2')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+            else if(document.getElementById('s3').checked){
+                var g_graph = document.getElementsByClassName('gtav_frame_graph3')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+            else if(document.getElementById('s4').checked){
+                var g_graph = document.getElementsByClassName('gtav_frame_graph4')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+            else if(document.getElementById('s5').checked){
+                var g_graph = document.getElementsByClassName('gtav_frame_graph5')
+                len = g_graph.length
+                console.log(len)
+                for (var i = 0; i < len; i++) {
+                    g_graph[i].style.display = "block";    
+                }
+            }
+
+
+        }
+    }
+    function updateImg(){
+
+
+        
+        
+        if(document.getElementById('choice1').checked){
+            document.getElementById('frame').style.display="block";
+            byFrame()
+        }
+        else if(document.getElementById('choice2').checked){
+            document.getElementById('sample').style.display="block";
+            top3graphs()
+        }
+
+    }// end of updateImg
+    </script>
+
+
+    </body>
+</html>
