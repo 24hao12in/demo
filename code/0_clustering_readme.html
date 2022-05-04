@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+        <!-- <style>
+            #allImage {display:none;}
+        </style> -->
+        <!-- <script type="text/javascript" src="./first_script.js"></script> -->
+        <title>Game Clustering</title>
+    </head>
+    <body>
+        <h1>Source Code For New Apps' Tuning </h1>
+        <div>
+        <form>
+            <br>
+            <fieldset class='evo'style="width:90% ; height:200px; display:inline-block;vertical-align:top ; border: 0;">
+                <h2>Sample shader graphs</h2>
+                <br>
+                <ul>
+                    <li>The sample graphs of disassembly shaders can be found here 
+                        <a href="../source_code/sample_graph/edgelist/f0_d2339_PS_0x00862c00_edgelist">[sample graph edgelist] </a>
+                        <a href="../source_code/sample_graph/hash/f0_d2339_PS_0x00862c00_nodelist">[sample graph nodelist] </a> </li>
+                </ul>
+                <br>
+                <h2>Scripts explanation </h2>
+                <p>All the scripts are written in python 3.8. To run the script, please lunch a python tools like Anaconda or directly run "python xx.py"</p>
+                <br>
+                <ol id="order_list">
+                    <li>Frequent subgraphs mining
+                            <a href="https://github.com/betterenvi/gSpan">[code] </a>
+                    </li>
+                    <p>This makes use of python library from the link above with min_support = 25% of input graph # and min_node=5</p> 
+                    <br>
+                           
+                    <li>Convert results from gSpan to graph edge list and node list
+                            <a href="../source_code/New_App_Tuning/fsm_file_to_edgelist_hash.py">[code] </a>
+                    </li>        
+                    <p>The input to this script is the gspan output file, the outputs are the subgraphs represented by edgelist and nodelist in separate folders.</p>
+                    <br>
+                    <li>Measure pair-wise similarity value between graphs in each scene dataset
+                            <a href="../source_code/New_App_Tuning/graph_similarity_measure.py">[code] </a>
+                    </li>
+                    <p>The inputs are all shader graphs, output are the WL kernel similarity values for each pair of shader graphs</p>
+                    <br>
+                    <li>Select the highest similarity one from pair-wise measurement and form dataset for clustering
+                            <a href="../source_code/New_App_Tuning/prepare_dataset_culstering.py">[code] </a>      
+                    </li>
+                    <p>The inputs are all the pair-wise similarities, the output is the maximum similarities between the game shader graph and across all other game shader graphs.                             
+                    The data is arranged in grid and will be used for training. </p> 
+                    <br>
+
+                    <li>Cluster games into groups using K-Means with PCA model. The result is viewed in a 3D plot
+                            <a href="../source_code/New_App_Tuning/Kmeans_3dplot.py">[code] </a>                     
+                    </li>
+                    <p>The input is the prepared dataset in previous step. Output is the train/test result with 3D plot for visualization</p>
+                    <br>
+                </ol>
+
+
+
+
+                <br>
+                <h2> Useful Link</h2>
+                <ol>
+                    <li>gSpan algorithm
+                        <a href="https://github.com/betterenvi/gSpan">[code] </a>  
+                    </li> 
+                </ol>
+            </fieldset>
+        </form>                                   
+        </div>
+    </body>
+</html>                    

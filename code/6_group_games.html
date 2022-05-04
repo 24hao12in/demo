@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+        <!-- <style>
+            #allImage {display:none;}
+        </style> -->
+        <!-- <script type="text/javascript" src="./first_script.js"></script> -->
+        <title>Game clustering</title>
+    </head>
+    <body>
+        <h1>Identify A New Game's Group </h1>
+        <br>
+        <div>
+        <form>
+            <fieldset style="width:45% ; border:1;display: inline-block;">
+                <legend>Clustering result for 22 games</legend>
+                <table border='1'>
+                    <tr>
+                        <th>Group1</th>
+                        <th>Group2</th>
+                        <th>Group3</th>
+                        <th>Group4</th>
+                    </tr>
+                    <tr>
+                        <td>Suntemple  </td>
+                        <td>FC5(Scene1) </td>
+                        <td>F1_2018(Scene1)  </td>
+                        <td>Cyberpunk2077</td>
+                    </tr>
+                    <tr>
+                        <td>F1_2020  </td>
+                        <td>FC5(Scene2)  </td>
+                        <td> F1_2018(Scene2) </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Battlefield5(Scene3)</td>
+                        <td>FC5(Scene3)</td>
+                        <td>F1_2018(Scene3)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>MetroExodus</td>
+                        <td>VRMARK(Scene3) </td>
+                        <td>F1_2018(Scene4)</td>
+                        <td></td>
+                    </tr>  
+                    
+                    <tr>
+                        <td>HorizonZeroDawn  </td>
+                        <td></td>
+                        <td>Battlefield5(Scene1) </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>VRMARK(Scene1)  </td>
+                        <td>  </td>
+                        <td>Battlefield5(Scene2) </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>The Medium</td>
+                        <td></td>
+                        <td>The Wicher(Scene1) </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Anno</td>
+                        <td></td>
+                        <td>The Wicher(Scene2)</td>
+                        <td></td>
+                    </tr>    
+                    <tr>
+                        <td>XuanYuanSword7</td>
+                        <td></td>
+                        <td>The Wicher(Scene3)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>VRMARK(Scene2)</td>
+                        <td></td>
+                    </tr>
+                   
+                </table>
+            </fieldset>
+            <fieldset class="frame" style="display: inline-block;width:20% ; border:1;">
+                <legend>Clustering result in 3D plot </legend>
+                    <div class="inline-block1">
+                        <img src="../result_image/cluster/3dplot_kmeans_24game.png" class='3d'id="plot3d" style="display:inline-block;">
+                    </div>
+                    <br>
+            </fieldset>
+
+        </form> 
+        <br>
+        <form>
+                
+
+        </form> 
+        <form>
+            <fieldset style="width: 65% ; border:1;">
+                <legend>Choose game to check its group </legend>
+                <div class="game_checkbox">
+                    <input type="radio" value="3" class="cluster" name ="Fortnite"id="s1"> Fortnite<br>
+                    <input type="radio" value="1" class="cluster" name ="Hitman2"id="s2"> Hitman2<br>
+                </div>
+                <div class="game_checkbox">
+                    <input type="radio" value="2" class="cluster" name ="FC5(Scene4)"id="s4"> FC5(Scene4)<br>
+                    <input type="radio" value="1" class="cluster" name = "Godfall"id="s5"> Godfall<br>
+                <br>    
+                </div>
+                <br>
+
+                <input type="button"id="mySubmit" name="submit" value="Select" onclick="show()">
+                <input type="reset" id="myclear" name="clear" value="Reset" onclick="remove()">
+            </fieldset>
+        </form>
+        <br>
+        <fieldset class="prediction_table" style="display: none;width:65% ;border:1;">
+                <legend>Clustering result in table</legend>
+                <div class="inline-block10"  style="display:inline-block;">
+                    <table class="box" id="box1" style="display:none;"></table>
+                    <table class="box" id="box2" style="display:none;"></table>
+                    <table class="box" id="box3" style="display:none;"></table>
+                    <table class="box" id="box4" style="display:none;"></table>
+                </div>
+                <div class="inline-block10" style="display:inline-block;">
+                    <img src="../result_image/cluster/3dplot_kmeans_24game_fc5.png" class='plot3d'id="fc5" style="display:none;">
+                    <img src="../result_image/cluster/3dplot_kmeans_24game_fornite.png" class='plot3d'id="fornite" style="display:none;">
+                    <img src="../result_image/cluster/3dplot_kmeans_24game_godfall.png" class='plot3d'id="godfall" style="display:none;">
+                    <img src="../result_image/cluster/3dplot_kmeans_24game_hitman2.png" class='plot3d'id="hitman2" style="display:none;">
+
+                </div>
+    
+                <div class="inline-block10" style="display:inline-block;">
+                    <fieldset id = 'fc5_msg' class='msg' style=" width:600px ; display:none;border: 0;">
+                    <legend>Possible explanations of clustering result </legend>
+                        <ul>
+                            <li>Different scenes from the same game have somewhat similar frequent subgraphs</li>
+                        </ul>
+                    </fieldset>  
+                    <fieldset id='fortnite_msg' class='msg' style=" width: 600px ;display:none;border: 0;">
+                        <legend>Possible explanations of clustering result </legend>
+                        <ul>
+                            <li>Different scenes from the same game have somewhat similar frequent subgraphs. </li>
+                        </ul>
+                     </fieldset> 
+    
+                    <fieldset id='hitman2_msg' class='msg' style="width: 600px ;display:none;border: 0;">
+                        <legend>Possible explanations of clustering result </legend>
+                        <ul>
+                            <li>9/11 games in the same group use Microsoft DirectX 12 for rendering the GPU pipeline. Hitman2 is one of the 9 games</li>
+
+                        </ul>
+                    </fieldset>  
+                    <fieldset id='godfall_msg' class='msg' style="width: 600px ;display:none;border: 0;">
+                        <legend>Possible explanations of clustering result </legend>
+                        <ul>
+                            <li>Game engines used for developing the games may affect the high-level coding, as a result the shader codes can be affected. In the same group, XuanYuanSword7, Suntemple and Godfall are all adopting Unreal Engine. </li>
+                            <br>
+                            <li>9/11 games in the same group use Microsoft DirectX 12 for rendering the GPU pipeline. Godfall is one of the 9 games</li>
+                            
+                        </ul>
+                    </fieldset>  
+
+                </div>
+        </fieldset>
+    </div>
+
+
+
+    <script>
+        function remove(){
+            document.location.reload()
+            var images = document.getElementsByClassName('3d');
+            var l = images.length;
+            for (var i = 0; i < l; i++) {
+                    if(images[i].style.display==='block'){
+                        images[i].style.display='none'
+                    }
+            }
+            var frames = document.getElementsByClassName('frame');
+            var l = frames.length;
+            for (var i = 0; i < l; i++) {
+                    if(frames[i].style.display==='block'){
+                        frames[i].style.display='none'
+                    }
+            }
+        }
+        function show() {
+            updateImg()
+            // document.getElementById('btnID').style.display = "mySubmit";
+        }
+
+    function updateImg(){
+        const group1arr=['Suntemple','F1_2020','Battlefield5(Scene3)','MetroExodus','HorizonZeroDawn','VRMARK(Scene1)','The Medium' ,'Anno','XuanYuanSword7'];
+        const group2arr=['FC5(Scene1)','FC5(Scene2)','FC5(Scene3)','FC5(Scene4)','VRMARK(Scene3)'];
+        const group3arr=['F1_2018(Scene1)','F1_2018(Scene2)','F1_2018(Scene3)','F1_2018(Scene3)','Battlefield5(Scene1)','Battlefield5(Scene2)','The Wicher(Scene1)','	The Wicher(Scene2)','VRMARK(Scene2)'];
+        const group4arr=[];
+        // document.getElementsByClassName('new3d').style.display="block";
+        console.log(document.getElementsByClassName('prediction_table')[0])
+        document.getElementsByClassName('prediction_table')[0].style.display="block";
+        var result = document.getElementsByClassName('cluster');
+        console.log(result)
+        var l = result.length;
+        console.log(l)
+
+        for (var i = 0; i < l; i++) {
+            console.log(i)
+            if(result[i].checked){
+                
+                console.log(result[i])
+                console.log(result[i].name)
+
+                if(result[i].name==='Fortnite'){
+                    document.getElementById('fornite').style.display="inline-block";
+                    document.getElementById('fortnite_msg').style.display="inline-block";
+                    
+                }  
+                else if(result[i].name==='Hitman2'){
+                    document.getElementById('hitman2').style.display="inline-block";
+                    document.getElementById('hitman2_msg').style.display="inline-block";
+                } 
+                else if(result[i].name==='FC5(Scene4)'){
+                    document.getElementById('fc5').style.display="inline-block";
+                    document.getElementById('fc5_msg').style.display="inline-block";
+                } 
+                else if(result[i].name==='Godfall'){
+                    document.getElementById('godfall').style.display="inline-block";
+                    document.getElementById('godfall_msg').style.display="inline-block";
+                } 
+
+                if( result[i].value==='1'){
+                     group1arr.push(result[i].name)
+                     var html = "<table border='1|1'>";
+                    html+="<tr><td><b>Group1</b></td></tr>"
+                    for (var i = 0; i < group1arr.length; i++) {
+                        html+="<tr>";
+                        html+="<td>"+group1arr[i]+"</td>";
+                        html+="</tr>";
+                    }
+                    html+="</table>";
+                    document.getElementById("box1").innerHTML = html;
+                    document.getElementById("box1").style="border:thin solid #1e1d45; height:300px; width:200px";
+                    break;
+                }
+                else if(result[i].value==='2'){
+                    group2arr.push(result[i].name)
+
+                    var html = "<table border='1|1'>";
+                    html+="<tr><td><b>Group2</b></td></tr>"
+                    for (var i = 0; i < group2arr.length; i++) {
+                        html+="<tr>";
+                        html+="<td>"+group2arr[i]+"</td>";
+                        html+="</tr>";
+                    }
+                    html+="</table>";
+                    document.getElementById("box2").innerHTML = html;
+                    document.getElementById("box2").style="border:thin solid #1e1d45; height:300px; width:200px";                   
+                    break; 
+                }
+                 else if(result[i].value==='3'){
+                    group3arr.push(result[i].name)
+                    var html = "</table>";
+                    html+="<tr><td><b>Group3</b></td></tr>"
+                    for (var i = 0; i < group3arr.length; i++) {
+                        html+="<tr>";
+                        html+="<td>"+group3arr[i]+"</td>";
+                        html+="</tr>";
+                    }
+                    html+="</table>";
+                    console.log(html)
+                    document.getElementById("box3").innerHTML = html;
+                    document.getElementById("box3").style="border:thin solid #1e1d45; height:300px; width:200px";       
+          
+                    break; 
+                }
+                //  else if(result[i].value==='4'){
+                //     console.log(group4arr.length)
+                //     group4arr.push(result[i].name)
+                //     console.log(group4arr.length)
+                //     var html = "<table border='1'>";
+                //     html+="<tr><td><b>Group4</b></td></tr>"
+                //     for (var i = 0; i < group4arr.length; i++) {
+                //         html+="<tr>";
+                //         html+="<td>"+group4arr[i]+"</td>";
+                //         html+="</tr>";
+                //     }
+                //     html+="</table>";
+                //     document.getElementById("box4").innerHTML = html;
+                //     document.getElementById("box4").style="border:thick solid #1e1d45; height:300px; width:200px";                    
+                //     break;  
+                
+                //}
+
+            }
+        }
+
+
+        console.log(group1arr)
+        console.log(group2arr)
+        console.log(group3arr)
+        console.log(group4arr)
+    }// end of updateImg
+    </script>
+
+
+    </body>
+</html>

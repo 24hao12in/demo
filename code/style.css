@@ -1,0 +1,315 @@
+*{
+    margin: 0;
+    padding: 10;
+}
+body{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #eeedee;
+    color: rgb(22, 32, 5);
+    text-align: left;
+    font-size: 20px;
+    padding: 10px;
+}
+#selectedGame{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(22, 32, 5);
+    font-size:  0.9em;
+}
+#selectedFrame,#selectedFrame_fs,#selectedFrame_gtav{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(22, 32, 5);
+    font-size:  0.9em;
+}
+#mySubmit,#myclear{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(9, 19, 63);
+    background-color: #d6e9b4;
+    font-size:  1em;
+}
+.text-wrap {
+    white-space: normal;
+  }
+.fs_frame_graph2,.fs_frame_graph1,.ts_frame_graph1{
+    width: 400px;
+    height: 300px;
+}
+.games{
+    width: 450px;
+    height: 300px;
+}
+.fs_wl,.gtav_wl{
+    width: 450px;
+    height: 280px;  
+}
+.gtav_frame_graph1,.gtav_frame_graph2,.gtav_frame_graph3,.gtav_frame_graph4,.gtav_frame_graph5{
+    width: 400px;
+    height: 300px;
+}
+.game_checkbox{
+    display: inline-block;
+}
+#TSimage{
+    width: 500px;
+    height: 300px;
+}
+#FS1image, #FS2image{
+    width: 500px;
+    height: 300px;
+}
+#G1image,#G2image,#G3image,#G4image,#G5image{
+    width: 500px;
+    height: 300px;
+}
+.evo{
+    width: 400px;
+    height: 300px; 
+}
+.degree,.cycle{
+    width: 400px;
+    height: 250px;
+}
+#plot3d{
+    width: 380px;
+    height: 330px; 
+}
+.plot3d{
+    width: 300px;
+    height: 300px; 
+}
+
+.gcn_fs{
+    width: 400px;
+    height: 250px;  
+}
+.gcn_gtav{
+    width: 400px;
+    height: 250px;
+}
+.acc1{
+    width: 750;
+    height: 300px;
+}
+
+.allImage{
+    width: 750px;
+    height: 300px;
+    margin: 10;
+    padding: 10px;
+}
+.cluster{
+    margin: 10;
+    padding: 10px;
+}
+
+h1{
+    font-size: 35px;
+    margin: 0;
+    color: rgb(1, 0, 12);
+}
+
+.flow{
+    display: inline-block;
+ }
+
+.inline-block1 {
+    display: inline-block;
+    vertical-align:top;
+ }
+
+ .inline-block10 {
+    display: inline-block;
+    vertical-align:top;
+    margin: 10;
+    padding: 10px;
+ }
+
+ .inline-block2 {
+    display: inline-block;
+ }
+
+ .tfidf_wl {
+    display: inline-block;
+ }
+ .ts_sample1{
+    vertical-align:top;
+}
+ .shader_checkbox{
+     display: inline-block;
+     vertical-align:top;
+ }
+ .ML{
+    display: inline-block;
+    vertical-align:top; 
+ }
+
+ .cycle_degree_img{
+    display: inline-block;
+    vertical-align:top;
+ }
+ .frame{
+    display: inline-block;
+    vertical-align:top;
+ }
+ .game_checkbox{
+    display: inline-block;
+    vertical-align:top;
+    margin: 10;
+    padding: 10px;
+    
+ }
+ .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(168, 189, 183);
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: rgb(75, 28, 28);
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid rgb(228, 174, 174);
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+.all_s{
+    width: 400px;
+    /* height: 300px; */
+     display: inline-block;
+     vertical-align:top;
+ }
+ .gtav_sample_graph1,.gtav_sample_graph2,.gtav_sample_graph3,.gtav_sample_graph4,.gtav_sample_graph5{
+    width: 400px;
+    height: 300px;
+ }
+ table {
+    width: 100%;
+  }
+  
+  th {
+    height: 70px;
+  }
+  .box{
+    display: inline-block;
+    vertical-align:top;
+ }
+ #box1,#box2,#box3,#box4{
+    vertical-align:top;
+ }
+ .prediction_table{
+    vertical-align:top;
+ }
+ .group_result{
+    width: 400px;
+    height: 300px; 
+ }
+ .btnImage{
+    width: 400px;
+    height: 250px;
+}
+#order_list{
+    margin: 150px,150px,150px,150px;
+    padding: 150px,150px,150px,150px;
+}
+
+/* 
+#monkey{
+    font-size: 50px;
+    color: whitesmoke;
+    background-color: brown;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+#donkey{
+    font-family: 'Courier New', Courier, monospace;
+    color:yellow;
+    font-size: 44px;
+    background-color: tomato;
+
+}
+.try1{
+    background-color: turquoise;
+
+}
+.try2{
+    background-color: wheat;
+}
+
+
+p{
+    font-style: italic;
+}
+h2{
+    color: #555;
+    border-top: solid 1px orange;
+    border-bottom: outset 2px greenyellow;
+    padding: 1em;
+}
+ol{
+    border-bottom:solid 3px hotpink;
+    border-top: solid 3px  indianred;
+}
+
+
+.try1 h2{
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.try2 p{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.try1 p em{
+    color:black;
+} */

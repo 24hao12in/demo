@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Graph Analysis on shaders</title>
+        <!-- <link href="style.css" rel="stylesheet"> -->
+        <style type="text/css">
+            .fieldset-auto-width {
+                 display: inline-block;
+            }
+            legend {
+                font-size:  1.6em;
+                font-weight:  bold;
+                position:  relative;
+                top:  -.4em;
+            }
+            p, li{
+                font-size:  1.2em;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Demonstration of ShaderNet</h1>
+          <h2><em> A pipeline regarding how to analyze a new game to efficently improve GPU performance from shader perspective </em></h2>
+        <fieldset style="width:96% ;  display:inline-block;vertical-align:top ; border: 1;"> 
+            <h2>Link to the demonstration video<a href="https://youtu.be/RZqzaJwAXT8">[Video]</a></h2>
+        </fieldset>    
+        <br><br>
+        <fieldset style="width:96% ;  display:inline-block;vertical-align:top ; border: 1;"> 
+            <legend>Analyze a video game's basic information</legend>
+            <fieldset class='evo'style="width:35% ; height:200px; display:inline-block;vertical-align:top ; border: 0;">
+                <ul>
+                    <li> <a href="./code/1_real_image.html">view orignal scenes from games   </a>
+                        <!-- <a href="./source_code/shader_graph_structural_evolution/">[code]</a><a href="">[readme]</a></li> -->
+                    <li> <a href="./code/2_converted_graph.html">view the shader code graphs   </a>
+                        <!-- <a href="">[code]</a><a href="">[readme]</a></li></li> -->
+                    <li>  <a href="./code/3_evolution.html">Analyze the evolution of graph structural propterties   </a><br>
+                        <a href="./code/0_evolution_readme.html">[code with readme]</a>
+                    </li>
+                </ul>
+            </fieldset> 
+            <fieldset class='evo'style="width:20% ;height:200px; display:inline-block;vertical-align:top;border: 0;">
+                <img src="./result_image/GrandTheftAutoV_pass0_r1920x1080.png"  style="width:100%;height:190px;"  >
+            </fieldset> 
+            <fieldset class='evo'style="width:15% ;height:200px; display:inline-block;vertical-align:top;border: 0;">
+                <img src="./result_image/graph/sample/fs_s1f1000_gs_sampleGT1_pm4ps_f1000_d0_GS_0x0000000101442400_unfold_edgelist.png" style="width:100%;height:190px;"  >
+            </fieldset> 
+            <fieldset class='evo'style="width:18% ;height:200px; display:inline-block;vertical-align:top;border: 0;">
+                <img src="./result_image/figure2-9_FS_node_bar.png"  style="width:100%;height:220px;"  >
+            </fieldset> 
+    </fieldset>
+
+    <br><br>
+    <fieldset style="border: 0;margin-left: 0px;">
+        <fieldset  class='flow'style="width:50% ; display:inline-block;vertical-align:top; border: 0;margin-left: 0px;">
+            <fieldset style="width:90%;">
+                <legend>Given a new game, identify its group</legend>
+                <p>Identify which existing game group the new game belongs to</p>
+                <p>If it can be grouped with existing games, use analysis of existing game group </p>
+                <p>If not, identify its low efficiency frequent sub-patterns</p>
+                <ul>
+                    <li> <a href="./code/6_group_games.html">Check if it belongs to any existing game groups</a></li>
+                    <a href="./code/0_clustering_readme.html">[code with readme]</a>
+                </li>
+                </ul>
+            </fieldset>
+            <br>
+            <fieldset style="width:90% ;">
+                <legend>Given a new game, identify its low efficiency shaders</legend> 
+                <ul> 
+                    <li> <a href="./code/7_shader_efficiency.html">Check shader efficiency</a></li>
+                    <a href="./code/0_efficiency_readme.html">[code with readme]</a>
+                </li>
+                </ul>
+            </fieldset>
+            <!-- <br>
+            <fieldset style="width:90%;">
+                <legend> Given a few unknown frames </legend>
+                <p>Check if these data are in the same scene or they should be separately treated as different scenes</p>
+                <ul>
+                    <li> <a href="./code/5_sudden_change.html">Identify scenes of these frames</a></li>
+                </ul>
+            </fieldset> -->
+            <br>
+            <fieldset style="width:90%;">
+                <legend>Predict scene of an unknow frame</legend>
+                <p>Given an unknow frame number shader codes, check which scene it belongs to</p>
+                <p>If it belongs to known scenes, use representative frame data from that group to tune GPU performance</p>
+                <p>If it doesnt belong to any scene, treat it as a separate scene to tune GPU performance</p>
+                <ul>
+                    <li><a href="./code/4_GCN.html">Predict scene for unknown frame</a></li>
+                    <a href="./code/0_GCN_readme.html">[code with readme]</a>
+                </li>
+                </ul>
+            </fieldset>
+        </fieldset> 
+        <fieldset class='flow'style="width:45% ; height=300px;display:inline-block;vertical-align:top;">
+                <legend>ShaderNet's Architecture</legend>
+                    <img src="./result_image/Arch.PNG" id="flowchart" style="width:100%"  >
+        </fieldset> 
+    </fieldset>
+        
+        
+      </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+        <!-- <style>
+            #allImage {display:none;}
+        </style> -->
+        <!-- <script type="text/javascript" src="./first_script.js"></script> -->
+        <title>Evolution</title>
+    </head>
+    <body>
+        <h1>Source Code For Structural Properties Evolution </h1>
+        <div>
+        <form>
+            <br>
+            <fieldset class='evo'style="width:90% ; height:200px; display:inline-block;vertical-align:top ; border: 0;">
+                <h2>Sample shader graphs</h2>
+                <br>
+                <ul>
+                    <li>The sample graphs of disassembly shaders can be found here 
+                        <a href="../source_code/sample_graph/edgelist/f0_d2339_PS_0x00862c00_edgelist">[sample graph edgelist] </a>
+                        <a href="../source_code/sample_graph/hash/f0_d2339_PS_0x00862c00_nodelist">[sample graph nodelist] </a> </li>
+
+                </ul>
+                <br>
+                <h2>Scripts explanation </h2>
+                <p>All the scripts are written in python 3.8. To run the script, please lunch a python tools like Anaconda or directly run "python xx.py"</p>
+                <br>
+                                               
+                 <ol id="order_list">
+                    <li>Variation of node counts in shader graphs across scenes and plot the result
+                            <a href="../source_code/shader_graph_structural_evolution/node_count.py">[code] </a></li>
+                    <li>Variation of edge counts in shader graphs across scenes and plot the result
+                            <a href="../source_code/shader_graph_structural_evolution/edge_count.py">[code] </a></li>
+                    <p>For edge and node count scripts, the input is the count of edge and node per shader graph, the output is the plot shown in the page </p>    
+                    <br>         
+                <br>
+                    <li>Variation of cycle counts in shader graphs across frames and plot the result
+                            <a href="../source_code/shader_graph_structural_evolution/cycle_count.py">[code] </a></li>
+                    <li>Variation of node degrees in shader graphs across frames and plot the result
+                            <a href="../source_code/shader_graph_structural_evolution/degree_count.py">[code] </a>                               
+                    </li>
+                    <p>For cycle and degree count scripts, the input is the shader graph representing by edgelist and nodelist, the output specify the degree and cycle count for each shader graph</p>
+                    <br>
+
+                </ol>
+            </fieldset>
+        </form>                                   
+        </div>
+    </body>
+</html>                    

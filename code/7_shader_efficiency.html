@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+        <!-- <style>
+            #allImage {display:none;}
+        </style> -->
+        <!-- <script type="text/javascript" src="./first_script.js"></script> -->
+        <title>Shader efficiency</title>
+    </head>
+    <body>
+        <h1>Shader Efficiency Classification </h1>
+        <div>
+            <form>
+                <fieldset  style="width:90% ; border:1;">
+                    <!-- <legend>Choose 1 game</legend> -->
+                    Choose a game:<br>
+                    <select id='selectedGame'>
+                        <option value="" selected="selected" hidden="hidden">Choose here</option>
+                        <option value='MetroExodus' class="cluster" name = "MetroExodus">MetroExodus</option>
+                        <option value='Fortnite' class="cluster"name = "Fortnite">Fortnite</option>
+                        <option value='Hitman2' class="cluster" name = "Hitman2">Hitman2</option>
+                    </select>
+                    <br><br>
+                    <!-- <div id="boton"> -->
+                    <input type="button"id="mySubmit" name="submit" value="Select" onclick="show()">
+                    <input type="reset" id="myclear" name="clear" value="Reset" onclick="remove()">
+            </fieldset>
+            </form>  
+
+            <br> 
+            <fieldset id="highlow_frame" style="display: none; width:60% ;">
+                <legend>Prediction result</legend>
+
+                <fieldset id='MetroExodus'class='MetroExodus' style="display: none;">
+                    <fieldset class='ML' style="border: 1;width:100% ;">
+                        <legend>Low efficiency examples</legend>
+                            <img src="../result_image/efficiency/low-hw/f11_MetroExodus_DX12_2K_lip_distinct_25percent_11993.png" 
+                            class="games"id="fs_f98_cs" />
+                            <img src="../result_image/efficiency/low-hw/f11_MetroExodus_DX12_2K_lip_distinct_25percent_15004.png" 
+                            class="games"id="fs_f98_cs"/>
+                    </fieldset>
+                    <fieldset class='MH' style="border: 1;width:100% ;">
+                        <legend>High efficiency examples</legend>
+                            <img src="../result_image/efficiency/high-hw/f11_MetroExodus_DX12_2K_lip_distinct_25percent_11993.png" 
+                            class="games"id="fs_f98_cs" />
+                            <img src="../result_image/efficiency/high-hw/f11_MetroExodus_DX12_2K_lip_distinct_25percent_15000.png" 
+                            class="games"id="fs_f98_cs" />
+                    </fieldset>
+                </fieldset>  
+
+                <fieldset id='Fortnite' class = 'Fortnite' style="display: none;">
+                    <fieldset  class='ML' style="border: 1;width:100% ;">
+                        <legend>Low efficiency examples</legend>
+                            <img src="../result_image/efficiency/low-hw/f39_Fortnite_dx12_4k_lip_distinct_25percent_116.png" 
+                            class="games"id="fs_f98_cs" />
+                            <img src="../result_image/efficiency/low-hw/f39_Fortnite_dx12_4k_lip_distinct_25percent_147.png" 
+                            class="games"id="fs_f98_cs"/>
+                    </fieldset>
+                    <fieldset  class='MH' style="border: 1;width:100% ;">
+                        <legend>High efficiency examples</legend>        
+                        <img src="../result_image/efficiency/high-hw/f39_Fortnite_dx12_4k_lip_distinct_25percent_1.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/high-hw/f39_Fortnite_dx12_4k_lip_distinct_25percent_125.png" 
+                        class="games"id="fs_f98_cs" />
+                    </fieldset>    
+                </fieldset>  
+                <fieldset id='Hitman2' style="display: none;">
+                    <fieldset class='ML' style="border: 1;width:100% ;">
+                        <legend>Low efficiency examples</legend>
+                        <img src="../result_image/efficiency/low-hw/f49_Hitman2_DX12_4K_lip_distinct_25percent_15893.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/low-hw/f49_Hitman2_DX12_4K_lip_distinct_25percent_2608.png" 
+                        class="games"id="fs_f98_cs"/>
+                    </fieldset>
+                    <fieldset  class='MH' style="border: 1;width:100% ;">
+                        <legend>High efficiency examples</legend>                               
+                        <img src="../result_image/efficiency/high-hw/f49_Hitman2_DX12_4K_lip_distinct_25percent_2545.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/high-hw/f49_Hitman2_DX12_4K_lip_distinct_25percent_2415.png" 
+                        class="games"id="fs_f98_cs" />
+                    </fieldset>
+                </fieldset>  
+            </fieldset>
+
+
+                <fieldset id = 'MetroExodus_msg' class='MetroExodus' style=" display:none;border: 1;">
+                    <legend>Basic information </legend>
+                   <h3>Low efficiency sample 1:</h3>
+                   <ul>
+                    <li>Appear in 193 shader graphs (25%)</li>
+                   </ul>
+                   <br>
+                   <h5>Possible impact factors</h5>
+                    <ul>
+                        <li>Many branch jumps</li>
+                    </ul>
+                    <br><br>
+                    <h3>Low efficiency sample 2:</h3>
+                    <ul>
+                        <li>Appear in 229 shader graphs (30%)</li>
+                    </ul>
+                    <br>
+                    <h5>Possible impact factors</h5>
+                    <ul>
+                        <li>IMAGE_LOAD</li>
+                        <li>IMAGE_STORE</li>
+                        <li>BUFFER_LOAD</li>
+                        <li>BUFFER_STORE</li>
+                    </ul>
+                </fieldset>  
+                <fieldset id='Fortnite_msg' class='Fortnite' style=" display:none;border: 1;">
+                    <legend>Basic information</legend>
+                   <h3>Low efficiency sample 1:</h3>
+                   <ul>
+                    <li>Appear in 163 shader graphs (25%)</li>
+                   </ul>
+                   <br>
+                   <h5>Possible impact factors</h5>
+                    <ul>
+                        <li>IMAGE_LOAD</li>
+                        <li>IMAGE_STORE</li>
+                        <li>BUFFER_LOAD</li>
+                        <li>BUFFER_STORE</li>
+                        <li>Long latency wait</li>
+                    </ul>
+                    <br><br>
+                    <h3>Low efficiency sample 2:</h3>
+                    <ul>
+                        <li>Appear in 169 shader graphs (26%)</li>
+                    </ul>
+                    <br>
+                    <h5>    Possible impact factors</h5>
+                    <ul>
+                        <li>IMAGE_LOAD</li>
+                        <li>IMAGE_STORE</li>
+                        <li>BUFFER_LOAD</li>
+                        <li>BUFFER_STORE</li>
+                    </ul>
+                </fieldset> 
+
+                <fieldset id='Hitman2_msg' class='Hitman2' style="display:none;border: 1;">
+                    <legend>Basic information</legend>
+                   <h3>Low efficiency sample 1:</h3>
+                   <ul>
+                    <li>Appear in 178 shader graphs (33%)</li>
+                   </ul>
+                   <br>
+                   <h5>    Possible impact factors</h5>
+                    <ul>
+                        <li>IMAGE_LOAD</li>
+                        <li>IMAGE_STORE</li>
+                        <li>BUFFER_LOAD</li>
+                        <li>BUFFER_STORE</li>
+                    </ul>
+                    <br><br>
+                    <h3>Low efficiency sample 2:</h3>
+                    <ul>
+                        <li>Appear in 136 shader graphs (25%)</li>
+                    </ul>
+                    <br>
+                    <h5>    Possible impact factors</h5>
+                    <ul>
+                        <li>IMAGE_LOAD</li>
+                        <li>IMAGE_STORE</li>
+                        <li>BUFFER_LOAD</li>
+                        <li>BUFFER_STORE</li>
+                        <li>Long latency wait</li>
+                    </ul>
+                </fieldset>  
+
+            <br><br>
+                <fieldset id='prediction_percentage'style="  display:none;border: 1;">
+                    <legend>Shader efficiency prediction accuracy</legend>
+                    <table border='1' id='prediction_metroexodus'style="width:800px; display:none;">
+                        <tr>
+                            <th>Game</th>
+                            <th>Average occurance in % <br>(actual low efficiency shader)</th>
+                            <th>Average occurance in % <br>(actual high efficiency shader)</th>
+                            <th>Average occurance in %<br> (predicted low efficiency shader)</th>
+                            <th>Average occurance in %<br> (predicted high efficiency shader)</th>
+                            <th>Accuracy</th>
+                        </tr>
+                        <tr>
+                            <td>MetroExodus  </td>
+                            <td>29.173% </td>
+                            <td>32.253%  </td>
+                            <td>29.803%</td>
+                            <td>31.979%</td>
+                            <td>96.77%</td>
+                        </tr>
+                    </table>
+                    <table border='1' id='prediction_fortnite'style="display:none;">
+                        <tr>
+                            <th>Game</th>
+                            <th>Average occurance in % <br>(actual low efficiency shader)</th>
+                            <th>Average occurance in % <br>(actual high efficiency shader)</th>
+                            <th>Average occurance in % <br>(predicted low efficiency shader)</th>
+                            <th>Average occurance in % <br>(predicted high efficiency shader)</th>
+                            <th>Accuracy</th>
+                        </tr>
+                        <tr>
+                            <td>Fortnite  </td>
+                            <td>27.865% </td>
+                            <td>29.847%</td>
+                            <td>28.078%</td>
+                            <td>29.761%</td>
+                            <td>97.73%</td>
+                        </tr>
+                    </table>
+                    <table border='1' id='prediction_hitman2'style="display:none;">
+                        <tr>
+                            <th>Game</th>
+                            <th>Average occurance in % <br>(actual low efficiency shader)</th>
+                            <th>Average occurance in % <br>(actual high efficiency shader)</th>
+                            <th>Average occurance in % <br>(predicted low efficiency shader)</th>
+                            <th>Average occurance in % <br>(predicted high efficiency shader)</th>
+                            <th>Accuracy</th>
+                        </tr>
+
+                        <tr>
+                            <td>Hitman2</td>
+                            <td>28.967%</td>
+                            <td>30.504%</td>
+                            <td>28.819%</td>
+                            <td>30.575%</td>
+                            <td>97.3%</td>
+                            
+                        </tr>
+                    </table>
+    
+            <!-- <fieldset id="acc_frame" style="display: none;">
+                <legend>Shader efficiency prediction accuracy</legend>
+                 -->
+                    <!-- <div class="inline-block1">
+                        <img src="../result_image/efficiency_RF_CV.png" class='3d'id="3dplot" >
+                    </div> -->
+            <!-- </fieldset> -->
+     
+        </div>
+
+
+
+    <script>
+        function remove(){
+            document.location.reload()
+            var images = document.getElementsByClassName('ts_wl');
+            var l = images.length;
+            for (var i = 0; i < l; i++) {
+                    if(images[i].style.display==='block'){
+                        images[i].style.display='none'
+                    }
+            }
+            var images = document.getElementsByClassName('gtav_wl');
+            var l = images.length;
+            for (var i = 0; i < l; i++) {
+                    if(images[i].style.display==='block'){
+                        images[i].style.display='none'
+                    }
+            }
+            var images = document.getElementsByClassName('3d');
+            var l = images.length;
+            for (var i = 0; i < l; i++) {
+                    if(images[i].style.display==='block'){
+                        images[i].style.display='none'
+                    }
+            }
+            document.getElementById('acc_frame').style.display='none'
+            document.getElementById('highlow_frame').style.display='none'
+        }
+        function show() {
+            updateImg()
+            // document.getElementById('btnID').style.display = "mySubmit";
+        }
+
+    function updateImg(){
+        document.getElementById('prediction_percentage').style="width:83% ; border:1;display : block;";
+        document.getElementById('highlow_frame').style="width:65% ; border:1;display : inline-block;";
+
+        var select = document.getElementById('selectedGame');
+        console.log(select)
+		var result = select.options[select.selectedIndex];
+        console.log(result)
+
+        if( result.value==='MetroExodus'){  
+
+            document.getElementById('MetroExodus').style=" display:inline-block;vertical-align:top;border: 0;";
+            document.getElementById('MetroExodus_msg').style="width:20% ;height:735px; display:inline-block;vertical-align:top;border: 1;";
+            document.getElementById('prediction_metroexodus').style=" display:inline-block;vertical-align:top;border: 1;";
+            //style="width:20% ;height:200px; display:inline-block;vertical-align:top;border: 0;">
+        }
+        else if(result.value==='Fortnite'){
+            document.getElementById('Fortnite').style=" display:inline-block;vertical-align:top;border: 0;";
+            document.getElementById('Fortnite_msg').style="width:20% ;height:735px; display:inline-block;vertical-align:top;border: 1;";
+            document.getElementById('prediction_fortnite').style=" display:inline-block;vertical-align:top;border: 1;";
+        }
+        else if(result.value==='Hitman2'){
+            document.getElementById('Hitman2').style=" display:inline-block;vertical-align:top;border: 0;";
+            document.getElementById('Hitman2_msg').style="width:20% ;height:735px; display:inline-block;vertical-align:top;border: 1;";
+            document.getElementById('prediction_hitman2').style=" display:inline-block;vertical-align:top;border: 1;";
+        }
+                         
+
+    }// end of updateImg
+    </script>
+
+
+    </body>
+</html>
+
+               <!-- <fieldset style="width:90% ; border:1;">
+                    <legend>Choose 1 game</legend>
+                    
+                        <div class="game_checkbox">
+                            <label class="container">The Medium
+                                <input type="checkbox" value="0"class="cluster"name = "Medium">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Godfall
+                                <input type="checkbox" value="0"class="cluster"name = "Godfall">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Fortnite
+                                <input type="checkbox" value="1" class="cluster"name = "Fortnite">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Hitman2
+                                <input type="checkbox" value="0"class="cluster"name = "Hitman2">
+                                <span class="checkmark"></span>
+                            </label>                       
+                    </div>
+                    <div class="game_checkbox">
+                          <label class="container">F1_2018(Scene1)
+                            <input type="checkbox" value="1"class="cluster"name = "F1_2018(Scene1)">
+                            <span class="checkmark"></span>
+                          </label>
+                          <label class="container">F1_2018(Scene2)
+                            <input type="checkbox" value="1"class="cluster"name = "F1_2018(Scene2)">
+                            <span class="checkmark"></span>
+                          </label>
+                          <label class="container">F1_2018(Scene3)
+                            <input type="checkbox" value="1"class="cluster"name = "F1_2018(Scene3)">
+                            <span class="checkmark"></span>
+                          </label>
+
+                            <label class="container">F1_2018(Scene4)
+                                <input type="checkbox" value="1"class="cluster"name = "F1_2018(Scene4)">
+                                <span class="checkmark"></span>
+                              </label>    
+
+                    </div>
+                    <div class="game_checkbox">
+                        <label class="container">Cyberpunk2077
+                            <input type="checkbox" value="2" class="cluster" name = "Cyberpunk2077">
+                             <span class="checkmark"></span>
+                           </label>
+
+
+                          <label class="container">Battlefield5(Scene1)
+                            <input type="checkbox" value="1"class="cluster"name = "Battlefield5(Scene1)">
+                            <span class="checkmark"></span>
+                        </label>
+                          <label class="container">Battlefield5(Scene2)
+                                <input type="checkbox" value="1"class="cluster"name = "Battlefield5(Scene2)">
+                                <span class="checkmark"></span>
+                          </label>
+                          <label class="container">Battlefield5(Scene3)
+                            <input type="checkbox" value="0"class="cluster"name = "Battlefield5(Scene3)">
+                            <span class="checkmark"></span> 
+                        </label>
+                    </div>
+                    <div class="game_checkbox">
+
+                        <label class="container">The Wicher(Scene1)
+                            <input type="checkbox" value="1"class="cluster"name = "The Wicher(Scene1)">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">The Wicher(Scene2)
+                            <input type="checkbox" value="1"class="cluster"name = "The Wicher(Scene2)">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">The Wicher(Scene3)
+                            <input type="checkbox" value="1"class="cluster"name = "The Wicher(Scene3)">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">MetroExodus
+                            <input type="checkbox" value="0"class="cluster"name = "MetroExodus">
+                            <span class="checkmark"></span>
+                            </label>
+
+                    </div>
+    
+    
+                    <div class="game_checkbox">
+                        <label class="container">FC5(Scene1)
+                            <input type="checkbox" value="3"class="cluster"name = "FC5(Scene1)">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">FC5(Scene2)
+                            <input type="checkbox" value="3"class="cluster"name = "FC5(Scene2)">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">FC5(Scene3)
+                            <input type="checkbox" value="3"class="cluster"name = "FC5(Scene3)">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">FC5(Scene4)
+                            <input type="checkbox" value="3"class="cluster"name = "FC5(Scene4)">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+    
+                    <div class="game_checkbox">
+                        <label class="container">HorizonZeroDawn
+                            <input type="checkbox" value="0"class="cluster"name = "HorizonZeroDawn">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">VRMARK(Scene1)
+                            <input type="checkbox" value="0"class="cluster"name = "VRMARK(Scene1)">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">VRMARK(Scene2)
+                            <input type="checkbox" value="1"class="cluster"name = "VRMARK(Scene2)">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">VRMARK(Scene3)
+                            <input type="checkbox" value="3"class="cluster"name = "VRMARK(Scene3)">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+    
+ 
+    
+                    <div class="game_checkbox">
+                        <label class="container">XuanYuanSword7
+                            <input type="checkbox" value="0"class="cluster"name = "XuanYuanSword7">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Anno
+                            <input type="checkbox" value="0"class="cluster"name = "Anno">
+                            <span class="checkmark"></span>
+                        </label>
+
+                        <label class="container">Suntemple
+                            <input type="checkbox" value="0"class="cluster"name = "Suntemple">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">F1_2020
+                            <input type="checkbox" value="0"class="cluster"name = "F1_2020"> 
+                            <span class="checkmark"></span>
+                          </label>
+                    </div>
+                        <br><br>
+                        <input type="button"id="mySubmit" name="submit" value="Select" onclick="show()">
+                        <input type="reset" id="myclear" name="clear" value="Reset" onclick="remove()">
+                </fieldset> -->
+
+                
+                <!-- <fieldset id='Cyberpunk2077' style="display: none;">
+                    <legend>High efficiency</legend>
+                        <img src="../result_image/efficiency/high/f756_Cyberpunk2077_DX12_4k_lip_distinct_25percent_2009.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/high/f756_Cyberpunk2077_DX12_4k_lip_distinct_25percent_2745.png" 
+                        class="games"id="fs_f98_cs" />
+                        <legend>Low efficiency</legend>
+                        <img src="../result_image/efficiency/low/f756_Cyberpunk2077_DX12_4k_lip_distinct_25percent_1965.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/low/f756_Cyberpunk2077_DX12_4k_lip_distinct_25percent_2696.png" 
+                        class="games"id="fs_f98_cs"/>
+                </fieldset>
+
+                <fieldset id='Godfall' style="display: none;">
+                    <legend>High efficiency</legend>
+                        <img src="../result_image/efficiency/high/f29_Godfall_4k_DX12_lip_distinct_25percent_7656.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/high/f29_Godfall_4k_DX12_lip_distinct_25percent_8021.png" 
+                        class="games"id="fs_f98_cs" />
+                        <legend>Low efficiency</legend>
+                        <img src="../result_image/efficiency/low/f29_Godfall_4k_DX12_lip_distinct_25percent_20923.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/low/f29_Godfall_4k_DX12_lip_distinct_25percent_9223.png" 
+                        class="games"id="fs_f98_cs"/>
+                </fieldset>  
+                <fieldset id='Medium' style="display: none;">
+                    <legend>High efficiency</legend>
+                        <img src="../result_image/efficiency/high/f2901_Medium_Scene3_DX12_2K_lip_distinct_25percent_18658.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/high/f2901_Medium_Scene3_DX12_2K_lip_distinct_25percent_6307.png" 
+                        class="games"id="fs_f98_cs" />
+                        <legend>Low efficiency</legend>
+                        <img src="../result_image/efficiency/low/f2901_Medium_Scene3_DX12_2K_lip_distinct_25percent_11625.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/low/f2901_Medium_Scene3_DX12_2K_lip_distinct_25percent_9059.png" 
+                        class="games"id="fs_f98_cs"/>
+                </fieldset>
+                <fieldset id='f2004_f12018' style="display: none;">
+                    <legend>High efficiency</legend>
+                        <img src="../result_image/efficiency/high/f2004_f12018_dx11_lip_distinct_25percent_298.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/high/f2004_f12018_dx11_lip_distinct_25percent_5.png" 
+                        class="games"id="fs_f98_cs" />
+                        <legend>Low efficiency</legend>
+                        <img src="../result_image/efficiency/low/f2004_f12018_dx11_lip_distinct_25percent_1847.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/low/f2004_f12018_dx11_lip_distinct_25percent_1930.png" 
+                        class="games"id="fs_f98_cs"/>
+                </fieldset>                   
+                <fieldset id='f344_f12018' style="display: none;">
+                    <legend>High efficiency</legend>
+                        <img src="../result_image/efficiency/high/f344_f12018_DX11_lip_distinct_25percent_1717.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/high/f344_f12018_DX11_lip_distinct_25percent_230.png" 
+                        class="games"id="fs_f98_cs" />
+                        <legend>Low efficiency</legend>
+                        <img src="../result_image/efficiency/low/f344_f12018_DX11_lip_distinct_25percent_1884.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/low/f344_f12018_DX11_lip_distinct_25percent_1884.png" 
+                        class="games"id="fs_f98_cs"/>
+                </fieldset>  
+                <fieldset id='f810_f12018' style="display: none;">
+                    <legend>High efficiency</legend>
+                        <img src="../result_image/efficiency/high/f810_f12018_DX11_lip_distinct_25percent_1966.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/high/f810_f12018_DX11_lip_distinct_25percent_422.png" 
+                        class="games"id="fs_f98_cs" />
+                        <legend>Low efficiency</legend>
+                        <img src="../result_image/efficiency/low/f810_f12018_DX11_lip_distinct_25percent_1974.png" 
+                        class="games"id="fs_f98_cs" />
+                        <img src="../result_image/efficiency/low/f810_f12018_DX11_lip_distinct_25percent_266.png" 
+                        class="games"id="fs_f98_cs"/>
+                </fieldset>   -->

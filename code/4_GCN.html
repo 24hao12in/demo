@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+        <!-- <style>
+            #allImage {display:none;}
+        </style> -->
+        <!-- <script type="text/javascript" src="./first_script.js"></script> -->
+        <title>Frame Prediction</title>
+    </head>
+    <body>
+        <h1>Scene Prediction Of An Unknown Frame </h1>
+        <form>
+            <fieldset style="width:70% ; border:1;">
+                Choose a game:<br>
+                <select id='selectedGame' onclick="pop_select_frame()">
+                    <option value="" selected="selected" hidden="hidden">Select a game</option>
+                    <option value='FS'>3D Marks FireStrike</option>
+                    <option value='GTA5'>Grand Theft AutoV</option>
+                </select>
+                <br><br>
+                <select id='selectedFrame_fs' style="display: none; width:30%; border:1;">  
+                    <option value="" selected="selected" hidden="hidden">Select a frame</option>
+                    <option value='400'>Frame #400</option>
+                    <option value='600'>Frame #600</option>
+                    <option value='800'>Frame #800</option>
+                    <option value='1600'>Frame #1600</option>   
+                    <option value='1800'>Frame #1800</option>
+                    <option value='2000'>Frame #2000</option>                                    
+                </select>
+                <select id='selectedFrame_gtav' style="display: none; width:30%;border:1;">
+                    <option value="" selected="selected" hidden="hidden">Select a frame</option>
+                    <option value='100'>Frame #100</option>
+                    <option value='200'>Frame #200</option>
+                    <option value='300'>Frame #300</option>
+                    <option value='400'>Frame #400</option>   
+                    <option value='500'>Frame #500</option>
+                    <option value='600'>Frame #600</option>                                    
+                </select>
+                <br><br>
+
+                <!-- <div id="boton"> -->
+                <input type="button"id="mySubmit" name="submit" value="Select" onclick="show()">
+                <input type="reset" id="myclear"  name="clear"  value="Reset"  onclick="remove()" >
+                </fieldset>
+        </form> 
+        <br>
+        <form>
+            <fieldset class="frame" id="frame_result" style="display: none;width:70% ; border:1;"> 
+                <legend>Prediction result</legend>
+                <!-- <p>This frame belongs to GTA5 game <em>Scene1</em></p> -->
+            </fieldset>
+            <br>
+
+
+            <fieldset class="frame" style="display: none;width:70% ; border:1;">
+                <legend>View scene difference through graph similarity</legend>
+                <div class="inline-block1" id="fs_wl" style="display:none;">
+                    <img src="../result_image/change/FS_LS_wl_tfid.png" class='fs_wl'id="FS_0_image" style="display:inline-block;">
+                    <!-- <figcaption style="display: inline-block;">Fire strike local shader graph similarity plot</figcaption> -->
+                    <img src="../result_image/change/FS_VS_wl_tfid.png" class='fs_wl'id="FS_0_image" style="display:inline-block;">
+                    <!-- <figcaption>Fire strike vertex shader graph similarity plot</figcaption> -->
+                </div>
+                <div class="inline-block1"id="gtav_wl"  style="display:none;">
+                    <img src="../result_image/change/GTA5_CS_wl.png" class='gtav_wl'id="FS_0_image" style="display:inline-block;">
+                    <img src="../result_image/change/GTA5_HS_wl.png" class='gtav_wl'id="FS_0_image" style="display:inline-block;">
+                </div> 
+            </fieldset>
+            <br>    
+
+
+            <fieldset class="frame" style="display: none;width:70% ; border:1;">
+                <legend>View important nodes for prediction</legend>
+
+
+                <fieldset class="fs_scene" style="display:none; ">
+                    <legend>Scene1</legend>
+                    <div class="inline-block1">
+                        <img src="../result_image/GCN/saliency_class_0_index_900.png" class='gcn_fs'id="FS_0_image" style="display:none;">
+                        <img src="../result_image/GCN/saliency_class_0_index_1100.png" class='gcn_fs'id="FS_0_image" style="display:none;">
+                        <img src="../result_image/GCN/saliency_class_0_index_1300.png" class='gcn_fs'id="FS_0_image" style="display:none;">
+                        <img src="../result_image/GCN/saliency_class_0_index_2100.png" class='gcn_fs'id="FS_0_image" style="display:none;">
+                        <img src="../result_image/GCN/saliency_class_0_index_2300.png" class='gcn_fs'id="FS_0_image" style="display:none;">
+                        <img src="../result_image/GCN/saliency_class_0_index_2500.png" class='gcn_fs'id="FS_0_image" style="display:none;">
+                    </div>
+                </fieldset>
+                <fieldset class="fs_scene" style="display:none;">
+                    <legend>Scene2</legend>
+                    <div class="inline-block1">
+                        <img src="../result_image/GCN/saliency_class_1_index_900.png" class='gcn_fs'id="FS_1_image" style="display:none;">
+                        <img src="../result_image/GCN/saliency_class_1_index_1100.png" class='gcn_fs'id="FS_1_image" style="display:none;">
+                        <img src="../result_image/GCN/saliency_class_1_index_1300.png" class='gcn_fs'id="FS_1_image" style="display:none;"> 
+                        <img src="../result_image/GCN/saliency_class_1_index_2100.png" class='gcn_fs'id="FS_1_image" style="display:none;">
+                        <img src="../result_image/GCN/saliency_class_1_index_2300.png" class='gcn_fs'id="FS_1_image" style="display:none;">
+                        <img src="../result_image/GCN/saliency_class_1_index_2500.png" class='gcn_fs'id="FS_1_image" style="display:none;">                          
+                    </div>
+                </fieldset>
+
+
+                <fieldset class="gtav_scene" style="display:none;">
+                    <legend>Scene1</legend>
+                    <div class="inline-block2">
+                        <img src="../result_image/GCN/saliency_class_0_index_46.png" class='gcn_gtav'id="GTA5_0_image" style="display:inline-block;">
+                    </div>
+                </fieldset>
+                <fieldset class="gtav_scene" style="display:none;">
+                    <legend>Scene2</legend>                   
+                    <div class="inline-block2">
+                        <img src="../result_image/GCN/saliency_class_1_index_96.png" class='gcn_gtav'id="GTA5_1_image" style="display:inline-block;"/>
+                    </div>
+                </fieldset>
+                <fieldset class="gtav_scene" style="display:none;">
+                    <legend>Scene3</legend>                        
+                    <div class="inline-block2">
+                        <img src="../result_image/GCN/saliency_class_2_index_146.png" class='gcn_gtav'id="GTA5_2_image" style="display:inline-block;">
+                    </div>
+                </fieldset>
+                <fieldset class="gtav_scene" style="display:none;">
+                    <legend>Scene4</legend>                        
+                    <div class="inline-block2">
+                        <img src="../result_image/GCN/saliency_class_3_index_196.png" class='gcn_gtav'id="GTA5_3_image1" style="display:none;"/>
+                        <img src="../result_image/GCN/saliency_class_3_index_246.png" class='gcn_gtav'id="GTA5_3_image2" style="display:none;"/>
+                    </div>
+                </fieldset>
+                <fieldset class="gtav_scene" style="display:none;">
+                    <legend>Scene5</legend>                       
+                    <div class="inline-block2">
+                        <img src="../result_image/GCN/saliency_class_4_index_296.png" class='gcn_gtav'id="GTA5_4_image" style="display:inline-block;">
+                    </div>
+                </fieldset>
+            </fieldset>
+            
+            <fieldset class="frame" style="display: none;width:70% ; border:1;">
+                <legend>View the train/test accuracy plot</legend>
+                    <div class="acc">
+                        <img src="../result_image/GCN/fs_testset_acc.png" class='acc1'id="fs_accc" style="display:none;">
+                    </div>
+                    <div class="acc">
+                        <img src="../result_image/GCN/gta5_trainset_acc.png" class='acc1'id="gcn_accc" style="display:none;">
+                    </div>
+            </fieldset>
+        </form> 
+
+    <script>
+        function remove(){
+            document.location.reload()
+            var images = document.getElementsByClassName('acc1');
+            var l = images.length;
+            for (var i = 0; i < l; i++) {
+                    if(images[i].style.display==='block'){
+                        images[i].style.display='none'
+                    }
+            }
+            var images = document.getElementsByClassName('fs_scene');
+            var l = images.length;
+            for (var i = 0; i < l; i++) {
+                    if(images[i].style.display==='inline-block'){
+                        images[i].style.display='none'
+                    }
+            }
+            var images = document.getElementsByClassName('gtav_scene');
+            var l = images.length;
+            for (var i = 0; i < l; i++) {
+                    if(images[i].style.display==='inline-block'){
+                        images[i].style.display='none'
+                    }
+            }
+            var frames = document.getElementsByClassName('frame');
+            var l = frames.length;
+            for (var i = 0; i < l; i++) {
+                    if(frames[i].style.display==='block'){
+                        frames[i].style.display='none'
+                    }
+            }
+        }
+        function show() {
+            updateImg()
+            // document.getElementById('btnID').style.display = "mySubmit";
+        }
+    function pop_select_frame(){
+        var select = document.getElementById('selectedGame');
+        console.log(select)
+		var option = select.options[select.selectedIndex];
+        
+        console.log(option)
+        if( option.value==='FS'){
+           
+            document.getElementById('selectedFrame_fs').style.display="block";
+        }
+        else if( option.value==='GTA5')
+            document.getElementById('selectedFrame_gtav').style.display="block";
+        
+    }
+    function updateImg(){
+        var select = document.getElementById('selectedGame');
+        console.log(select)
+		var option = select.options[select.selectedIndex];
+        console.log(option)
+        
+
+        /* Access image by id and change the display property to block*/
+        document.getElementsByClassName('frame')[0].style.display="block";
+        document.getElementsByClassName('frame')[1].style.display="block";
+        document.getElementsByClassName('frame')[2].style.display="block";
+        document.getElementsByClassName('frame')[3].style.display="block";
+        if( option.value==='FS'){
+            var select_frame = document.getElementById('selectedFrame_fs');
+            console.log(select_frame)
+            var option_frame = select_frame.options[select_frame.selectedIndex];
+            console.log(option_frame)
+            document.getElementById('fs_accc').style.display = "block";
+
+            document.getElementById('fs_wl').style.display = "block";
+            
+            // var fs_scene = document.getElementsByClassName('fs_scene');
+            // console.log(fs_scene)
+            // for (var i = 0; i < fs_scene.length; i++) {
+            //         if(fs_scene[i].style.display==='none'){
+            //             fs_scene[i].style.display='inline-block'
+            //         }
+            // }           
+
+            var html = "<p>This frame belongs to Fire Strike";
+            if (option_frame.value==='400'){
+                document.getElementsByClassName('fs_scene')[0].style.display = "block";
+                document.getElementsByClassName('gcn_fs')[0].style.display = "block";
+                // document.getElementsByClassName('gcn_fs')[6].style.display = "block";
+                html+=" game <em>Scene1";
+                }
+            else if(option_frame.value==='600'){
+                document.getElementsByClassName('fs_scene')[0].style.display = "block";
+                document.getElementsByClassName('gcn_fs')[1].style.display = "block";
+            // document.getElementsByClassName('gcn_fs')[7].style.display = "block";
+                html+=" game <em>Scene1";
+                }
+            else if(option_frame.value==='800'){
+                document.getElementsByClassName('fs_scene')[0].style.display = "block";
+                document.getElementsByClassName('gcn_fs')[2].style.display = "block";
+                // document.getElementsByClassName('gcn_fs')[8].style.display = "block";
+                html+=" game <em>Scene1";
+                }
+            else if(option_frame.value==='1600'){
+                document.getElementsByClassName('fs_scene')[1].style.display = "block";
+                // document.getElementsByClassName('gcn_fs')[3].style.display = "block";
+                document.getElementsByClassName('gcn_fs')[9].style.display = "block";
+                html+=" game <em>Scene2";
+                }
+            else if(option_frame.value==='1800'){
+                document.getElementsByClassName('fs_scene')[1].style.display = "block";
+                // document.getElementsByClassName('gcn_fs')[4].style.display = "block";
+                 document.getElementsByClassName('gcn_fs')[10].style.display = "block";
+                html+=" game <em>Scene2"; 
+                }    
+            else if(option_frame.value==='2000'){
+                document.getElementsByClassName('fs_scene')[1].style.display = "block";
+                // document.getElementsByClassName('gcn_fs')[5].style.display = "block";
+                document.getElementsByClassName('gcn_fs')[11].style.display = "block";
+                html+=" game <em>Scene2";  
+                }                                                                
+            html+="</em></p>";
+            document.getElementById("frame_result").innerHTML = html;
+                 
+        }
+        else if(option.value==='GTA5'){
+            var select_frame = document.getElementById('selectedFrame_gtav');
+            console.log(select_frame)
+            var option_frame = select_frame.options[select_frame.selectedIndex];
+            console.log(option_frame)
+            document.getElementById('gcn_accc').style.display = "block";
+            document.getElementById('gtav_wl').style.display = "block";
+
+            var gtav_scene = document.getElementsByClassName('gtav_scene');
+            // for (var i = 0; i < gtav_scene.length; i++) {
+            //         if(gtav_scene[i].style.display==='none'){
+            //             gtav_scene[i].style.display='inline-block'
+            //         }
+            // }  
+
+            var html = "<p>This frame belongs to ";//GTA5 game <em>Scene1
+            html+=option.value;
+            if (option_frame.value==='100'){
+                gtav_scene[0].style.display='inline-block'
+                html+=" game <em>Scene1";
+            }
+               
+            else if(option_frame.value==='200'){
+                gtav_scene[1].style.display='inline-block'
+                html+=" game <em>Scene2";
+            }
+                
+            else if(option_frame.value==='300'){
+                gtav_scene[2].style.display='inline-block'
+                html+=" game <em>Scene3";
+            }
+                
+            else if(option_frame.value==='400'){
+                gtav_scene[3].style.display='inline-block'
+                document.getElementById('GTA5_3_image1').style.display = 'inline-block'; 
+                html+=" game <em>Scene4";
+            }
+                
+            else if(option_frame.value==='500'){
+                gtav_scene[3].style.display='inline-block'
+                document.getElementById('GTA5_3_image2').style.display = 'inline-block'; 
+                html+=" game <em>Scene4"; 
+            }
+                    
+            else if(option_frame.value==='600'){
+                gtav_scene[4].style.display='inline-block'
+                html+=" game <em>Scene5"; 
+            }
+                                                                                 
+            html+="</em></p>";
+            document.getElementById("frame_result").innerHTML = html;
+        }
+    
+
+    }// end of updateImg
+    </script>
+
+
+    </body>
+</html>

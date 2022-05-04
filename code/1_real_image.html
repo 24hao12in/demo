@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="./style.css" rel="stylesheet">
+        <!-- <style>
+            #allImage {display:none;}
+        </style> -->
+        <!-- <script type="text/javascript" src="./first_script.js"></script> -->
+        <title>Real Images</title>
+    </head>
+    <body>
+        <h1>Actual Images Rendered On The Screen</h1>
+        <div>
+        <form>
+            <fieldset  style="width:60% ; border:1;">
+                    <h3>Choose a game:</h3>
+                    <select id='selectedGame' onclick="disableBtn()">
+                        <option value="" selected="selected" hidden="hidden">Choose here</option>
+                        <option value='TS'>3D Marks TimeSpy</option>
+                        <option value='FS'>3D Marks FireStrike</option>
+                        <option value='GTA5'>Grand Theft AutoV</option>
+                    </select>
+                    <br><br>
+                    <div class="radiobtn_group">
+                        Choose a scene: 
+                        <p>Please note that TimeSpy only has 1 scene (scene1), Fire Strike has 2 scenes (Scene1&amp;Scene2) and GTA5 has 5 scenes</p>
+                        <input type="radio" class="which_scene" name ="Scene"id="s1"> Scene1<br>
+                        <input type="radio" class="which_scene" name ="Scene"id="s2"> Scene2<br>
+                        <input type="radio" class="which_scene" name ="Scene"id="s3"> Scene3<br>
+                        <input type="radio" class="which_scene" name ="Scene"id="s4"> Scene4<br>
+                        <input type="radio" class="which_scene" name ="Scene"id="s5"> Scene5<br>
+                    <br>
+                    </div>
+                    <input type="button"id="mySubmit" name="submit" value="Select" onclick="show()">
+                    <input type="reset" id="myclear" name="clear" value="Reset" onclick="remove()">
+            </fieldset>
+                    <br><br>
+            <fieldset id="frame" style="width:30% ; border:1; display: none;">
+                    <legend>View the image </legend>        
+                    <div >
+                        <img src="../result_image/TimeSpy.png" class="allImage"id="TSimage" style="display:none;"/>
+                        <img src="../result_image/GrandTheftAutoV_pass0_r1920x1080.png" class="allImage" id="G1image" style="display:none;"/>
+                        <img src="../result_image/GrandTheftAutoV_pass1_r1920x1080.png" class="allImage" id="G2image" style="display:none;"/>
+                        <img src="../result_image/GrandTheftAutoV_pass2_r1920x1080.png" class="allImage"id="G3image" style="display:none;"/>
+                        <img src="../result_image/GrandTheftAutoV_pass3_r1920x1080.png"  class="allImage"id="G4image" style="display:none;"/>
+                        <img src="../result_image/GrandTheftAutoV_pass4_r1920x1080.png" class="allImage"id="G5image" style="display:none;"/>
+                        <img src="../result_image/FireStrike_GT1_2K.png" class="allImage"id="FS1image" style="display:none;"/>
+                        <img src="../result_image/FireStrike_GT2_2K.png" class="allImage"id="FS2image" style="display:none;"/>
+                    </div>
+            </fieldset>
+        </form> 
+    </div>
+
+
+
+    <script>   
+    function remove(){
+        document.location.reload()
+        var images = document.getElementsByClassName('allImage');
+        console.log(images)
+        var l = images.length;
+        // myDiv.innerHTML = "";
+        for (var i = 0; i < l; i++) {
+                if(images[i].style.display==='block'){
+                    console.log('inside')
+                    console.log(images[i])
+                    images[i].style.display='none'
+                }
+        }
+        var frame = document.getElementById('frame');
+        if(frame.style.display==='block'){
+                frame.style.display='none'
+        }
+        var numScene = document.getElementsByClassName("which_scene")
+        for (var i = 0; i < numScene.length; i++) {
+            numScene[i].disabled=false
+        }
+        
+    }
+    function show() {
+            updateImg()
+            // document.getElementById('btnID').style.display = "mySubmit";
+    }
+
+    function disableBtn(){
+        var select = document.getElementById('selectedGame');
+        console.log(select)
+		var option = select.options[select.selectedIndex];
+        console.log(option) 
+        var numScene = document.getElementsByClassName("which_scene")
+        console.log(numScene[0].id)
+        for (var i = 0; i < numScene.length; i++) {
+            numScene[i].disabled=false
+        }
+
+        if(option.value==='TS'){
+            for (var i = 0; i < numScene.length; i++) {
+                    if(numScene[i].id !=='s1'){
+                        numScene[i].disabled=true
+                    }
+            }
+        }
+        else if(option.value==='FS'){
+            for (var i = 0; i < numScene.length; i++) {
+                    if(numScene[i].id !=='s1' && numScene[i].id !=='s2' ){
+                        numScene[i].disabled=true
+                    }
+            }
+        }
+    }
+    function updateImg(){
+        var select = document.getElementById('selectedGame');
+        console.log(select)
+		var option = select.options[select.selectedIndex];
+        console.log(option) 
+
+        document.getElementById('frame').style.display="block";
+        if(document.getElementById('s1').checked && option.value==='TS'){
+            document.getElementById('TSimage').style.display = "block";
+        }
+
+        else if(document.getElementById('s1').checked && option.value==='FS'){
+            document.getElementById('FS1image').style.display = "block";
+        }
+        else if(document.getElementById('s1').checked && option.value==='GTA5'){
+            //document.getElementsByClassName('allImage').display="none";
+            document.getElementById('G1image').style.display = "block";
+        }
+        else if(document.getElementById('s2').checked && option.value==='FS'){
+            //document.getElementsByClassName('allImage').display="none";
+            document.getElementById('FS2image').style.display = "block";
+        }
+        else if(document.getElementById('s2').checked && option.value==='GTA5'){
+            //document.getElementsByClassName('allImage').display="none";
+            document.getElementById('G2image').style.display = "block";
+        }
+        else if(document.getElementById('s3').checked && option.value==='GTA5'){
+            //document.getElementsByClassName('allImage').display="none";
+            document.getElementById('G3image').style.display = "block";
+        }
+        else if(document.getElementById('s4').checked && option.value==='GTA5'){
+            //document.getElementsByClassName('allImage').display="none";
+            document.getElementById('G4image').style.display = "block";
+        }
+        else if(document.getElementById('s5').checked && option.value==='GTA5'){
+            //document.getElementsByClassName('allImage').display="none";
+            document.getElementById('G5image').style.display = "block";
+        }
+
+    }// end of updateImg
+    </script>
+
+
+    </body>
+</html>

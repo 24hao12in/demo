@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+        <!-- <style>
+            #allImage {display:none;}
+        </style> -->
+        <!-- <script type="text/javascript" src="./first_script.js"></script> -->
+        <title>sudden change detection</title>
+    </head>
+    <body>
+        <h1>Veiw the change in shader algorithm structure </h1>
+        <div>
+            <form>
+                <fieldset>
+                        <legend>View the image</legend>
+                        Choose a game:<br>
+                        <select id='selectedGame'>
+                            <option value="" selected="selected" hidden="hidden">Choose here</option>
+                            <option value='TS'>3D Marks TimeSpy</option>
+                            <option value='FS'>3D Marks FireStrike</option>
+                            <option value='GTA5'>Grand Theft AutoV</option>
+                        </select>
+                        <br><br>
+                        <!-- <div id="boton"> -->
+                        <input type="button"id="mySubmit" name="submit" value="Select" onclick="show()">
+                        <input type="reset" id="myClear" name="clear" value="Reset" onclick="remove()">
+                </fieldset>
+            </form> 
+
+            <form> 
+                    <fieldset class="frame" style="display: none;">
+                        <legend>Comparison between graph similarity to content similarity</legend>
+                            <div class="tfidf_wl">
+                                <img src="../result_image/change/TimeSpy_CS_wl_tfid.png" class='ts_wl'id="ts_cs" style="display:none;">
+                            </div>
+                            <div class="tfidf_wl">
+                                <img src="../result_image/change/TimeSpy_GS_wl_tfid.png" class='ts_wl'id="ts_gs" style="display:none;">
+                            </div>
+                            <div class="tfidf_wl">
+                                <img src="../result_image/change/GTA5_CS_wl_tfid.png" class='gtav_wl'id="gtav_cs" style="display:none;">
+                            </div>
+                            <div class="tfidf_wl">
+                                <img src="../result_image/change/GTA5_HS_wl_tfid.png" class='gtav_wl'id="gtav_hs" style="display:none;">
+                            </div>
+                        </fieldset>
+                        <br><br>
+                        <fieldset class="frame" style="display: none;">
+                        <legend>View the sudden change</legend>
+                            <div class="tfidf_wl">
+                                <img src="../result_image/change/FS_LS_wl_tfid.png" class='fs_wl'id="fs_ls" style="display:none;">
+                            </div>
+                            <div class="tfidf_wl">
+                                <img src="../result_image/change/FS_VS_wl_tfid.png" class='fs_wl'id="fs_vs" style="display:none;"/>
+                            </div>
+                            <br>
+                        </fieldset>
+            </form> 
+    </div>
+
+
+
+    <script>
+        function remove(){
+            var images = document.getElementsByClassName('ts_wl');
+            var l = images.length;
+            for (var i = 0; i < l; i++) {
+                    if(images[i].style.display==='block'){
+                        images[i].style.display='none'
+                    }
+            }
+            var images = document.getElementsByClassName('gtav_wl');
+            var l = images.length;
+            for (var i = 0; i < l; i++) {
+                    if(images[i].style.display==='block'){
+                        images[i].style.display='none'
+                    }
+            }
+            var images = document.getElementsByClassName('fs_wl');
+            var l = images.length;
+            for (var i = 0; i < l; i++) {
+                    if(images[i].style.display==='block'){
+                        images[i].style.display='none'
+                    }
+            }
+            var frames = document.getElementsByClassName('frame');
+            var l = frames.length;
+            for (var i = 0; i < l; i++) {
+                    if(frames[i].style.display==='block'){
+                        frames[i].style.display='none'
+                    }
+            }
+        }
+        function show() {
+            updateImg()
+            // document.getElementById('btnID').style.display = "mySubmit";
+        }
+
+    function updateImg(){
+        var select = document.getElementById('selectedGame');
+        console.log(select)
+		var option = select.options[select.selectedIndex];
+        console.log(option)
+
+        /* Access image by id and change the display property to block*/
+        if( option.value==='FS'){
+            document.getElementsByClassName('frame')[1].style.display="block";
+            document.getElementsByClassName('fs_wl')[0].style.display = "block";
+            document.getElementsByClassName('fs_wl')[1].style.display = "block";
+        }
+        else if(option.value==='GTA5'){
+            document.getElementsByClassName('frame')[0].style.display="block";
+            document.getElementsByClassName('gtav_wl')[0].style.display = "block";
+            document.getElementsByClassName('gtav_wl')[1].style.display = "block";
+        }
+        else if(option.value ==='TS'){
+            document.getElementsByClassName('frame')[0].style.display="block";
+            document.getElementsByClassName('ts_wl')[0].style.display = "block";
+            document.getElementsByClassName('ts_wl')[1].style.display = "block";
+        }
+
+        // uncheck()
+
+    }// end of updateImg
+    </script>
+
+
+    </body>
+</html>

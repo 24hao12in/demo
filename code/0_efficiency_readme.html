@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+        <!-- <style>
+            #allImage {display:none;}
+        </style> -->
+        <!-- <script type="text/javascript" src="./first_script.js"></script> -->
+        <title>Efficiency Prediction</title>
+    </head>
+    <body>
+        <h1>Source Code For ShaderNet New App Efficiency </h1>
+        <div>
+        <form>
+            <br>
+            <fieldset class='evo'style="width:90% ; height:200px; display:inline-block;vertical-align:top ; border: 0;">
+
+                <h2>Sample shader graphs</h2>
+                <br>
+                <ul>
+                    <li>The sample graphs of disassembly shaders can be found here 
+                        <a href="../source_code/sample_graph/edgelist/f0_d2339_PS_0x00862c00_edgelist">[sample graph edgelist] </a>
+                        <a href="../source_code/sample_graph/hash/f0_d2339_PS_0x00862c00_nodelist">[sample graph nodelist] </a> </li>
+                </ul>
+                <br>
+                <h2>Scripts explanation </h2>
+                <p>All the scripts are written in python 3.8. To run the script, please lunch a python tools like Anaconda or directly run "python xx.py"</p>
+                <br>
+                <ol id="order_list">
+                    <li>Frequent subgraph result analysis<br>
+                        Frequent subgraph mining utilized the library of gSpan in the link listed in useful link.<br>
+                        An example to convert gSpan output text to edgelist and nodelist:
+                        <a href="../source_code/New_App_Tuning/fsm_file_to_edgelist_hash.py">[code] </a> 
+                        <p>The input to this script is the gspan output file, the outputs are the subgraphs represented by edgelist and nodelist in separate folders. </p>
+                    </li>
+                    <br>
+                    <li>Classify frequent sub-structures into high/low efficiency
+                        <a href="../source_code/New_App_Efficiency/randomForest.py">[code] </a>  
+                    </li>  
+                    <p>RandomForest algorithm is applied.</p>
+                    <p>Input dataset: row is each shader subgraph, columns are the occurance of hardwares within the subgraphs</p>                       
+                </ol>
+                <br>
+                <h2> Useful Link</h2>
+                <ol>
+                    <li>gSpan algorithm
+                        <a href="https://github.com/betterenvi/gSpan">[code] </a>  
+                    </li> 
+                </ol>
+
+            </fieldset>
+        </form>                                   
+        </div>
+    </body>
+</html>                    
